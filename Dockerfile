@@ -1,8 +1,19 @@
+FROM maven:3.9.9-openjdk-17 AS build
+
+WORKDIR /app
+
+COPY pom.xml .
+COPY src ./src
+
+RUN mvn clean package -DskipTests
+
+
 FROM openjdk:17-slim
 
 WORKDIR /app
 
-COPY target/gestionAcademica-0.0.1-SNAPSHOT.jar app.jar
+ARG JAR_FILE=target/*.jar
+COPY --from=build ${JAR_FILE} app.jar
 
 EXPOSE 8080
 
