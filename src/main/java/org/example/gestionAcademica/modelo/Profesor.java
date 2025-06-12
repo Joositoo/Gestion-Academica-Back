@@ -35,8 +35,8 @@ public class Profesor {
     @Column(name = "password", nullable = false)
     private String password;
 
+    //@Lob
     @NotNull
-    @Lob
     @Column(name = "rol", nullable = false)
     private String rol;
 
